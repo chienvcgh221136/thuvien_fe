@@ -14,7 +14,7 @@ interface ListingPageProps {
 }
 
 const CATEGORY_INFO: Record<string, { title: string; desc: string; emoji: string }> = {
-  'sach-giay':    { title: 'Khám Phá Sách Giấy',    desc: 'Bộ sưu tập sách giáo khoa, sách tham khảo và văn học truyền thống dành cho học sinh và giáo viên THCS Dịch Vọng.',         emoji: '📚' },
+  'sach-giay':    { title: 'Khám Phá Sách Giấy',    desc: 'Bộ sưu tập sách giáo khoa, sách tham khảo và văn học truyền thống dành cho nhân viên CODII SOLUTIONS.',         emoji: '📚' },
   'sach-dien-tu': { title: 'Sách Điện Tử',          desc: 'Kho sách điện tử phong phú — đọc trực tuyến với chế độ lật trang 3D, hỗ trợ zoom và đánh dấu trang.',                         emoji: '💻' },
   'sach-noi':     { title: 'Sách Nói',              desc: 'Thư viện sách nói audio chất lượng cao, nghe mọi lúc mọi nơi.',                                                               emoji: '🎧' },
   'bai-giang':    { title: 'Bài Giảng Điện Tử',    desc: 'Tài liệu bài giảng PDF do giáo viên biên soạn, hỗ trợ đọc trực tuyến và tải về.',                                            emoji: '🎓' },
@@ -35,7 +35,7 @@ const AVAILABILITY = [
   { label: 'Sẵn sàng',    dotColor: 'bg-green-500', textColor: 'text-green-600' },
 ];
 
-/* Action button config per type */
+
 const getActionInfo = (type: string) => {
   switch (type) {
     case 'sach-dien-tu': return { icon: BookOpen, label: 'Đọc ngay',    color: 'bg-blue-500 hover:bg-blue-600',   autoReader: true };
@@ -61,7 +61,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
     if (category === 'sach-noi')     return b.type === 'sach-noi';
     if (category === 'bai-giang')    return b.type === 'bai-giang';
     if (category === 'video')        return b.type === 'video';
-    return true; // other categories show all
+    return true; 
   });
 
   const ITEMS_PER_PAGE = isAlbum ? 9 : 10;
@@ -71,14 +71,14 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
   return (
     <div className="animate-fade-in">
       <div className="max-w-[1200px] mx-auto px-8 py-8">
-        {/* Breadcrumb */}
+        
         <div className="flex items-center gap-1.5 text-sm text-gray-400 mb-4">
           <button onClick={() => onNavigate('home')} className="hover:text-green-600 transition-colors">Trang chủ</button>
           <ChevronRight size={14} />
           <span className="text-gray-700 font-medium">{info.title}</span>
         </div>
 
-        {/* Page header */}
+        
         <div className="mb-5">
           <h1 className="text-2xl font-black text-green-600 mb-1 flex items-center gap-2">
             <span>{info.emoji}</span> {info.title}
@@ -86,10 +86,10 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
           <p className="text-sm text-gray-500 max-w-xl">{info.desc}</p>
         </div>
 
-        {/* Filter bar */}
+        
         <div className="flex items-center gap-2 mb-5 flex-wrap">
           {isAlbum ? (
-            /* Album filters */
+            
             <>
               <select className="appearance-none bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-sm font-medium text-gray-700 cursor-pointer outline-none hover:border-teal-400 transition-colors">
                 <option value="">Danh mục ▾</option>
@@ -101,7 +101,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
               </select>
             </>
           ) : (
-            /* Normal filters */
+            
             <>
               {[
                 { label: 'Thể loại', options: ['Tất cả', 'Toán học', 'Ngữ văn', 'Ngoại ngữ', 'Khoa học'] },
@@ -127,7 +127,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
             ))}
           </select>
 
-          {/* View toggle — not for albums */}
+          
           {!isAlbum && (
             <div className="ml-auto flex gap-1">
               {(['grid', 'list'] as const).map(mode => (
@@ -142,7 +142,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
             </div>
           )}
 
-          {/* Album count */}
+          
           {isAlbum && (
             <span className="ml-auto text-sm text-gray-400">
               <strong className="text-gray-700">{books.length}</strong> album
@@ -150,7 +150,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
           )}
         </div>
 
-        {/* ═══ ALBUM GRID ═════════════════════════════════ */}
+        
         {isAlbum && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
             {(currentBooks.length > 0 ? currentBooks : BOOKS.filter(b => b.type === 'album').slice(0, ITEMS_PER_PAGE)).map((book, i) => (
@@ -159,14 +159,14 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
                 onClick={() => onNavigate('detail', book.id)}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer group"
               >
-                {/* Cover thumbnail */}
+                
                 <div className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
                   <img
                     src={book.cover}
                     alt={book.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  {/* Photo strip overlay (simulated) */}
+                  
                   {book.photos && book.photos.length > 1 && (
                     <div className="absolute bottom-2 left-2 right-2 flex gap-1">
                       {book.photos.slice(1, 4).map(p => (
@@ -181,14 +181,14 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
                       )}
                     </div>
                   )}
-                  {/* Photo count badge */}
+                  
                   <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/50 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full">
                     <Camera size={11} />
                     {book.photoCount || book.photos?.length || 0}
                   </div>
                 </div>
 
-                {/* Card body */}
+                
                 <div className="p-4">
                   <span className="inline-flex text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-100 text-teal-700 mb-2">
                     {book.category}
@@ -211,7 +211,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
           </div>
         )}
 
-        {/* ═══ STANDARD BOOK GRID ══════════════════════════ */}
+        
         {!isAlbum && (
           <>
             <div className={viewMode === 'grid' ? 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-6' : 'flex flex-col gap-3 mb-6'}>
@@ -227,20 +227,20 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
                       key={book.id}
                       className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex gap-4 cursor-pointer hover:shadow-md hover:border-green-200 transition-all"
                     >
-                      {/* Cover */}
+                      
                       <div
                         className="w-16 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-sm cursor-pointer"
                         onClick={() => onNavigate('detail', book.id)}
                       >
                         <img src={book.cover} alt={book.title} className="w-full h-full object-cover" />
                       </div>
-                      {/* Info */}
+                      
                       <div className="flex-1 min-w-0" onClick={() => onNavigate('detail', book.id)}>
                         <span className={`inline-flex text-[10px] font-bold px-2 py-0.5 rounded-full ${conf.bg} ${conf.text} mb-1`}>{conf.label}</span>
                         <h3 className="font-bold text-sm text-gray-900">{book.title}</h3>
                         <p className="text-xs text-gray-400">{book.author} • {book.publisher}</p>
                       </div>
-                      {/* Actions */}
+                      
                       <div className="flex flex-col items-end gap-2 shrink-0">
                         <div className="flex items-center gap-1 text-xs">
                           <span className={`w-1.5 h-1.5 rounded-full ${avail.dotColor}`} />
@@ -257,25 +257,25 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
                   );
                 }
 
-                /* Grid card */
+                
                 return (
                   <div
                     key={book.id}
                     className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-200 cursor-pointer group"
                   >
-                    {/* Cover */}
+                    
                     <div
                       className="relative"
                       style={{ aspectRatio: '3/4' }}
                       onClick={() => onNavigate('detail', book.id)}
                     >
                       <img src={book.cover} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                      {/* Availability */}
+                      
                       <div className="absolute top-2 right-2 flex items-center gap-1 bg-white/95 backdrop-blur-sm px-2 py-0.5 rounded-full text-[10px] font-semibold shadow-sm">
                         <span className={`w-1.5 h-1.5 rounded-full ${avail.dotColor}`} />
                         <span className={avail.textColor}>{avail.label}</span>
                       </div>
-                      {/* Quick-read overlay for ebooks */}
+                      
                       {(book.type === 'sach-dien-tu' || book.type === 'bai-giang') && (
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <button
@@ -288,7 +288,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
                       )}
                     </div>
 
-                    {/* Body */}
+                    
                     <div className="p-3" onClick={() => onNavigate('detail', book.id)}>
                       <span className={`inline-flex text-[10px] font-bold px-2 py-0.5 rounded-full mb-1.5 ${conf.bg} ${conf.text}`}>{conf.label}</span>
                       <h3 className="font-bold text-[13.5px] leading-snug mb-0.5 text-gray-900 line-clamp-2">{book.title}</h3>
@@ -300,7 +300,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
                       )}
                     </div>
 
-                    {/* Action button */}
+                    
                     <div className="px-3 pb-3">
                       <button
                         onClick={e => { e.stopPropagation(); onNavigate('detail', book.id, actInfo.autoReader); }}
@@ -314,7 +314,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
               })}
             </div>
 
-            {/* Pagination */}
+            
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
@@ -324,7 +324,7 @@ export const ListingPage: React.FC<ListingPageProps> = ({ category, onNavigate }
           </>
         )}
 
-        {/* Album pagination */}
+        
         {isAlbum && (
           <Pagination
             currentPage={currentPage}

@@ -7,7 +7,7 @@ import { ProfilePage } from './pages/ProfilePage';
 import { UploadPage } from './pages/UploadPage';
 import { ArticleListPage } from './pages/ArticleListPage';
 import { AudioPlayer } from './components/AudioPlayer';
-import { Book } from './data/mockData';
+import { Book, BOOKS } from './data/mockData';
 
 const LISTING_PAGES = ['sach-giay', 'sach-dien-tu', 'sach-noi', 'bai-giang', 'video', 'album', 'ky-nang-song', 'trending', 'new'];
 const ARTICLE_PAGES = ['tin-tuc', 'gioi-thieu-sach'];
@@ -15,14 +15,12 @@ const ARTICLE_PAGES = ['tin-tuc', 'gioi-thieu-sach'];
 export default function App() {
   const [currentPage, setCurrentPage]     = useState('home');
   const [selectedBookId, setSelectedBookId] = useState<string>('1');
-  const [playingBook, setPlayingBook]     = useState<Book | null>(null);
+  
+  const [playingBook, setPlayingBook]     = useState<Book | null>(BOOKS.find(b => b.type === 'sach-noi') || null);
   const [showToast, setShowToast]         = useState(false);
   const [autoOpenReader, setAutoOpenReader] = useState(false);
 
-  /**
-   * navigate(page, bookId?, autoReader?)
-   * autoReader = true  → khi vào DetailPage, tự động mở BookReader ngay
-   */
+  
   const navigate = (page: string, bookId?: string, autoReader = false) => {
     setCurrentPage(page);
     if (bookId) setSelectedBookId(bookId);
@@ -73,12 +71,12 @@ export default function App() {
         <Footer />
       </div>
 
-      {/* Audio player */}
+      
       {playingBook && (
         <AudioPlayer book={playingBook} onClose={() => setPlayingBook(null)} />
       )}
 
-      {/* Toast */}
+      
       {showToast && (
         <div className="fixed bottom-24 right-5 bg-gray-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 z-50 animate-slide-up">
           <span className="text-green-400">🎧</span>

@@ -10,7 +10,7 @@ interface HeaderProps {
   currentPage: string;
 }
 
-/* ── Danh mục tài liệu cho mega menu ─────────────────────── */
+
 const TAI_LIEU_CATEGORIES = [
   { id: 'khong-gian-van-hoa', label: 'Không gian văn hóa H...', icon: BookMarked, color: '#e53e3e' },
   { id: 'sach-giay',           label: 'Sách giấy',              icon: BookOpen,   color: '#38a169' },
@@ -25,21 +25,21 @@ const TAI_LIEU_CATEGORIES = [
 
 const MEGA_IMAGE = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop';
 
-/* ── MegaMenu Component ───────────────────────────────────── */
+
 const MegaMenu: React.FC<{ onNavigate: (page: string) => void; onClose: () => void }> = ({ onNavigate, onClose }) => (
   <div
     className="absolute top-full left-1/2 -translate-x-1/2 mt-0 z-50 animate-fade-in"
     style={{ width: 700 }}
     onMouseLeave={onClose}
   >
-    {/* Triangle arrow */}
+    
     <div className="flex justify-center">
       <div className="w-3 h-3 bg-white rotate-45 border-l border-t border-gray-200 -mb-1.5 shadow-sm" />
     </div>
 
     <div className="bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden">
       <div className="flex">
-        {/* Categories grid */}
+        
         <div className="flex-1 p-5">
           <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3">Danh mục tài liệu</p>
           <div className="grid grid-cols-3 gap-1.5">
@@ -74,7 +74,7 @@ const MegaMenu: React.FC<{ onNavigate: (page: string) => void; onClose: () => vo
           </div>
         </div>
 
-        {/* Image panel */}
+        
         <div className="w-48 flex-shrink-0 relative overflow-hidden rounded-r-2xl">
           <img
             src={MEGA_IMAGE}
@@ -112,7 +112,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage }) => {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  // Delayed close to prevent flicker when moving between button and dropdown
+  
   const openMega = () => {
     if (megaTimerRef.current) clearTimeout(megaTimerRef.current);
     setShowMegaMenu(true);
@@ -137,23 +137,23 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage }) => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 shadow-md">
-      {/* Top bar */}
+      
       <div className="bg-[#006633] h-[60px] flex items-center px-6 gap-4">
-        {/* Logo */}
+        
         <button
           onClick={() => onNavigate('home')}
           className="flex items-center gap-3 flex-shrink-0"
         >
-          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow">
-            <BookOpen size={22} className="text-[#006633]" />
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow p-1">
+            <img src="/logo.jpg" alt="Logo" className="w-full h-full object-contain" />
           </div>
           <div className="leading-tight">
             <div className="text-[10px] text-green-200 font-medium tracking-wide uppercase">THƯ VIỆN ĐIỆN TỬ</div>
-            <div className="text-white font-bold text-sm leading-none">THCS DỊCH VỌNG</div>
+            <div className="text-white font-bold text-sm leading-none">CODII SOLUTIONS</div>
           </div>
         </button>
 
-        {/* Nav links */}
+        
         <nav className="hidden lg:flex items-center gap-0.5 ml-6">
           {mainNavItems.map(item => {
             const isActive = item.id === 'tai-lieu'
@@ -211,7 +211,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage }) => {
 
         <div className="flex-1" />
 
-        {/* Search */}
+        
         <div className={`hidden md:flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1.5 transition-all duration-200
           ${searchFocused ? 'bg-white border-white w-64' : 'w-48'}`}>
           <Search size={14} className={searchFocused ? 'text-gray-400' : 'text-green-200'} />
@@ -230,7 +230,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage }) => {
           )}
         </div>
 
-        {/* Right actions */}
+        
         <div className="flex items-center gap-1">
           <button className="relative w-9 h-9 flex items-center justify-center rounded-full text-green-100 hover:bg-white/10 transition-colors">
             <Search size={18} className="md:hidden" />
@@ -249,7 +249,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage }) => {
               <div className="absolute right-0 top-11 bg-white border border-gray-200 rounded-xl shadow-xl w-52 py-1 z-50 animate-fade-in">
                 <div className="px-4 py-3 border-b border-gray-100">
                   <p className="text-sm font-semibold text-gray-800">Học sinh</p>
-                  <p className="text-xs text-gray-500">THCS Dịch Vọng</p>
+                  <p className="text-xs text-gray-500">CODII SOLUTIONS</p>
                 </div>
                 {[
                   { icon: User,     label: 'Trang cá nhân',  page: 'profile' },
@@ -278,7 +278,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage }) => {
             )}
           </div>
 
-          {/* Mobile menu */}
+          
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="lg:hidden w-9 h-9 flex items-center justify-center rounded-full text-green-100 hover:bg-white/10 transition-colors"
@@ -288,7 +288,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage }) => {
         </div>
       </div>
 
-      {/* Mobile nav dropdown */}
+      
       {mobileOpen && (
         <div className="lg:hidden bg-[#005529] border-t border-green-700 px-4 pb-3 animate-fade-in">
           {mainNavItems.map(item => (
@@ -300,7 +300,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, currentPage }) => {
               {item.label}
             </button>
           ))}
-          {/* Mobile: show categories */}
+          
           <div className="mt-2 pt-2 border-t border-green-700">
             <p className="text-[11px] text-green-400 uppercase font-bold tracking-wider px-3 mb-1">Danh mục</p>
             <div className="grid grid-cols-2 gap-1">
@@ -332,11 +332,11 @@ export const Footer: React.FC<FooterProps> = () => (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         <div>
           <div className="flex items-center gap-2 font-bold text-lg mb-3">
-            <BookOpen size={20} />
-            THCS Dịch Vọng
+            <img src="/logo.jpg" alt="Logo" className="w-6 h-6 object-contain" />
+            CODII SOLUTIONS
           </div>
           <p className="text-sm text-green-200 leading-relaxed">
-            Thư viện điện tử Trường THCS Dịch Vọng — nơi kết nối tri thức và học sinh.
+            Thư viện điện tử CODII SOLUTIONS — nơi kết nối tri thức và học sinh.
           </p>
         </div>
         <div>
@@ -350,14 +350,14 @@ export const Footer: React.FC<FooterProps> = () => (
         <div>
           <p className="font-semibold text-sm uppercase tracking-wider mb-3 text-green-300">Liên hệ</p>
           <div className="space-y-1.5">
-            {['📍 Cầu Giấy, Hà Nội', '📞 024 3764 xxxx', '✉️ thuvien@thcsdichvong.edu.vn'].map(l => (
+            {['📍 Cầu Giấy, Hà Nội', '📞 024 3764 xxxx'].map(l => (
               <p key={l} className="text-sm text-green-200">{l}</p>
             ))}
           </div>
         </div>
       </div>
       <div className="border-t border-green-700 pt-4 flex items-center justify-between flex-wrap gap-2">
-        <p className="text-xs text-green-300">© 2024 Trường THCS Dịch Vọng. Tất cả quyền được bảo lưu.</p>
+        <p className="text-xs text-green-300">© 2026 CODII SOLUTIONS. Tất cả quyền được bảo lưu.</p>
         <div className="flex gap-4">
           {['Liên hệ', 'Giới thiệu', 'Quy định mượn trả', 'Trợ giúp'].map(l => (
             <a key={l} href="#" className="text-xs text-green-300 hover:text-white transition-colors">{l}</a>
@@ -368,7 +368,7 @@ export const Footer: React.FC<FooterProps> = () => (
   </footer>
 );
 
-// Keep Sidebar export for compatibility
+
 interface SidebarProps {
   currentPage: string;
   onNavigate: (page: string) => void;

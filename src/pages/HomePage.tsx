@@ -47,13 +47,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
   return (
     <div className="animate-fade-in">
-      {/* ── HERO / TRENDING ──────────────────────────────── */}
+      
       <section className="relative overflow-hidden" style={{ minHeight: 380 }}>
         <div className="absolute inset-0 bg-cover bg-center transition-all duration-700" style={{ backgroundImage: `url(${heroImages[trendingIdx]})` }} />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
 
         <div className="relative max-w-[1200px] mx-auto px-8 py-10 flex gap-8">
-          {/* Left: featured book */}
+          
           <div className="flex-1 flex gap-7 items-start">
             <div
               className="w-36 flex-shrink-0 rounded-xl overflow-hidden shadow-2xl cursor-pointer hover:scale-105 transition-transform duration-300 border-2 border-white/20"
@@ -87,7 +87,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Right: trending list */}
+          
           <div className="hidden lg:flex flex-col gap-2.5 w-[340px] flex-shrink-0">
             {BOOKS.slice(0, 5).map((book, i) => {
               const conf = TYPE_CONFIG[book.type];
@@ -114,7 +114,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Dots */}
+        
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
           {BOOKS.slice(0, 5).map((_, i) => (
             <button
@@ -126,14 +126,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* ── CATEGORIES ──────────────────────────────────── */}
+      
       <section className="bg-[#f8f9fa] pt-8 pb-4">
         <div className="max-w-[1200px] mx-auto px-8">
           <div className="bg-white rounded-[20px] shadow-sm border border-gray-100 px-8 py-6 flex items-center">
             <h2 className="text-xl font-bold text-gray-800 whitespace-nowrap mr-12">Danh mục tài liệu</h2>
             
             <div className="flex-1 flex items-start justify-between overflow-x-auto scrollbar-hide px-4">
-              {/* 1. Không gian văn hóa HCM */}
+              
               <button onClick={() => onNavigate('khong-gian-van-hoa')} className="flex flex-col items-center gap-3 group flex-shrink-0 hover:-translate-y-1 transition-transform duration-200 w-28">
                 <div className="text-red-600 transition-transform group-hover:scale-110">
                   <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -144,7 +144,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <span className="text-[13px] font-medium text-gray-700 text-center leading-tight group-hover:text-red-600 transition-colors">Không gian văn hóa<br/>Hồ Chí Minh</span>
               </button>
 
-              {/* 2. Sách giấy */}
+              
               <button onClick={() => onNavigate('sach-giay')} className="flex flex-col items-center gap-3 group flex-shrink-0 hover:-translate-y-1 transition-transform duration-200 w-24">
                 <div className="text-green-500 transition-transform group-hover:scale-110">
                   <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -155,7 +155,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <span className="text-[13px] font-medium text-gray-700 text-center leading-tight group-hover:text-green-600 transition-colors">Sách giấy</span>
               </button>
 
-              {/* 3. Sách điện tử */}
+              
               <button onClick={() => onNavigate('sach-dien-tu')} className="flex flex-col items-center gap-3 group flex-shrink-0 hover:-translate-y-1 transition-transform duration-200 w-24">
                 <div className="text-red-500 transition-transform group-hover:scale-110">
                   <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -166,7 +166,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <span className="text-[13px] font-medium text-gray-700 text-center leading-tight group-hover:text-red-500 transition-colors">Sách điện tử</span>
               </button>
 
-              {/* 4. Sách nói */}
+              
               <button onClick={() => onNavigate('sach-noi')} className="flex flex-col items-center gap-3 group flex-shrink-0 hover:-translate-y-1 transition-transform duration-200 w-24">
                 <div className="text-orange-400 transition-transform group-hover:scale-110">
                   <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -177,7 +177,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <span className="text-[13px] font-medium text-gray-700 text-center leading-tight group-hover:text-orange-500 transition-colors">Sách nói</span>
               </button>
 
-              {/* 5. Bài giảng điện tử */}
+              
               <button onClick={() => onNavigate('bai-giang')} className="flex flex-col items-center gap-3 group flex-shrink-0 hover:-translate-y-1 transition-transform duration-200 w-28">
                 <div className="text-blue-500 transition-transform group-hover:scale-110">
                   <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -190,7 +190,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <span className="text-[13px] font-medium text-gray-700 text-center leading-tight group-hover:text-blue-600 transition-colors">Bài giảng điện tử</span>
               </button>
 
-              {/* 6. Video */}
+              
               <button onClick={() => onNavigate('video')} className="flex flex-col items-center gap-3 group flex-shrink-0 hover:-translate-y-1 transition-transform duration-200 w-24">
                 <div className="text-purple-500 transition-transform group-hover:scale-110">
                   <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -210,10 +210,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* ── MAIN CONTENT ────────────────────────────────── */}
+      
       <div className="max-w-[1200px] mx-auto px-8 py-8 space-y-10">
 
-        {/* Sách mới thêm */}
+        
         <BookRow
           title="Sách mới thêm"
           icon="📗"
@@ -223,7 +223,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           size="large"
         />
 
-        {/* Không gian văn hóa Hồ Chí Minh */}
+        
         <BookRow
           title="Không gian văn hóa Hồ Chí Minh"
           icon="⭐"
@@ -232,7 +232,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           onViewAll={() => onNavigate('khong-gian-van-hoa')}
         />
 
-        {/* Sách giấy */}
+        
         <BookRow
           title="Sách giấy"
           icon="📚"
@@ -241,7 +241,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           onViewAll={() => onNavigate('sach-giay')}
         />
 
-        {/* Sách điện tử — với nút Đọc ngay trực tiếp */}
+        
         <EbookRow
           title="Sách điện tử"
           icon="💻"
@@ -250,7 +250,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           onViewAll={() => onNavigate('sach-dien-tu')}
         />
 
-        {/* Sách nói */}
+        
         <BookRow
           title="Sách nói"
           icon="🎧"
@@ -259,7 +259,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           onViewAll={() => onNavigate('sach-noi')}
         />
 
-        {/* Bài giảng điện tử */}
+        
         <BookRow
           title="Bài giảng điện tử"
           icon="🎓"
@@ -268,7 +268,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           onViewAll={() => onNavigate('bai-giang')}
         />
 
-        {/* Video bài giảng */}
+        
         <BookRow
           title="Video bài giảng"
           icon="🎬"
@@ -278,16 +278,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           isVideo
         />
 
-        {/* Album ảnh */}
+        
         <AlbumSection albums={ALBUMS} onNavigate={onNavigate} />
       </div>
     </div>
   );
 };
 
-/* ──────────────────────────────────────────────────────────
-   Album Section
-────────────────────────────────────────────────────────── */
+
 interface AlbumSectionProps {
   albums: typeof ALBUMS;
   onNavigate: NavigateFn;
@@ -316,14 +314,14 @@ const AlbumSection: React.FC<AlbumSectionProps> = ({ albums, onNavigate }) => {
             onClick={() => onNavigate('detail', album.id)}
             className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer group"
           >
-            {/* Thumbnail */}
+            
             <div className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
               <img
                 src={album.cover}
                 alt={album.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              {/* Mini strip */}
+              
               {album.photos && album.photos.length > 1 && (
                 <div className="absolute bottom-1.5 left-1.5 right-1.5 flex gap-1">
                   {album.photos.slice(1, 4).map(p => (
@@ -333,13 +331,13 @@ const AlbumSection: React.FC<AlbumSectionProps> = ({ albums, onNavigate }) => {
                   ))}
                 </div>
               )}
-              {/* Photo count */}
+              
               <div className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
                 <Camera size={9} /> {album.photoCount || album.photos?.length || 0}
               </div>
             </div>
 
-            {/* Info */}
+            
             <div className="p-3">
               <h3 className="font-bold text-sm text-gray-900 line-clamp-2 mb-0.5 group-hover:text-teal-600 transition-colors">{album.title}</h3>
               <p className="text-xs text-gray-400">{album.category}</p>
@@ -355,9 +353,7 @@ const AlbumSection: React.FC<AlbumSectionProps> = ({ albums, onNavigate }) => {
   );
 };
 
-/* ──────────────────────────────────────────────────────────
-   Ebook Row — special row with "Đọc ngay" button
-────────────────────────────────────────────────────────── */
+
 interface EbookRowProps {
   title: string;
   icon: string;
@@ -386,7 +382,7 @@ const EbookRow: React.FC<EbookRowProps> = ({ title, icon, books, onNavigate, onV
             key={book.id}
             className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-lg hover:-translate-y-1.5 transition-all duration-200 cursor-pointer group"
           >
-            {/* Cover with overlay */}
+            
             <div
               className="relative"
               style={{ aspectRatio: '3/4' }}
@@ -394,7 +390,7 @@ const EbookRow: React.FC<EbookRowProps> = ({ title, icon, books, onNavigate, onV
             >
               <img src={book.cover} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
               <span className={`absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-full ${conf.bg} ${conf.text}`}>{conf.label}</span>
-              {/* Hover: Đọc ngay */}
+              
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <button
                   onClick={e => { e.stopPropagation(); onNavigate('detail', book.id, true); }}
@@ -414,7 +410,7 @@ const EbookRow: React.FC<EbookRowProps> = ({ title, icon, books, onNavigate, onV
               </div>
             </div>
 
-            {/* Đọc ngay button */}
+            
             <div className="px-3 pb-3">
               <button
                 onClick={e => { e.stopPropagation(); onNavigate('detail', book.id, true); }}
@@ -430,9 +426,7 @@ const EbookRow: React.FC<EbookRowProps> = ({ title, icon, books, onNavigate, onV
   </section>
 );
 
-/* ──────────────────────────────────────────────────────────
-   Generic BookRow
-────────────────────────────────────────────────────────── */
+
 interface BookRowProps {
   title: string;
   icon: string;

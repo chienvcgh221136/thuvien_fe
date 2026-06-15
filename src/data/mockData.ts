@@ -1,4 +1,4 @@
-// Mock data for the library application
+
 export type ResourceType = 'sach-giay' | 'sach-dien-tu' | 'sach-noi' | 'bai-giang' | 'video' | 'album';
 
 export interface AlbumPhoto {
@@ -34,8 +34,8 @@ export interface Book {
   pages?: number;
   videoUrl?: string;
   videoSource?: string;
-  photos?: AlbumPhoto[];        // dùng cho album
-  photoCount?: number;          // tổng số ảnh
+  photos?: AlbumPhoto[];        
+  photoCount?: number;          
 }
 
 export interface AudioChapter {
@@ -60,7 +60,7 @@ export interface Review {
 }
 
 export const BOOKS: Book[] = [
-  /* ─── SÁCH NÓI ─── */
+  
   {
     id: '1',
     title: 'Dế Mèn Phiêu Lưu Ký',
@@ -87,7 +87,7 @@ export const BOOKS: Book[] = [
     tableOfContents: ['Chương 1: Tôi sống độc lập', 'Chương 2: Phiêu lưu đầu tiên', 'Chương 3: Gặp Dế Trũi', 'Chương 4: Vùng đất lạ', 'Chương 5: Trở về cố hương'],
   },
 
-  /* ─── SÁCH GIẤY ─── */
+  
   {
     id: '2',
     title: 'Toán 8 - Tập 1',
@@ -150,7 +150,7 @@ export const BOOKS: Book[] = [
     pages: 350,
   },
 
-  /* ─── SÁCH ĐIỆN TỬ ─── */
+  
   {
     id: '4',
     title: 'Lịch Sử Hà Nội Nghìn Năm',
@@ -171,7 +171,7 @@ export const BOOKS: Book[] = [
     tableOfContents: ['Phần 1: Thăng Long thời phong kiến', 'Phần 2: Hà Nội thời Pháp thuộc', 'Phần 3: Hà Nội trong kháng chiến', 'Phần 4: Hà Nội đổi mới'],
   },
 
-  /* ─── VIDEO ─── */
+  
   {
     id: '5',
     title: 'Vật Lý 8: Chuyển Động Cơ Học',
@@ -199,7 +199,7 @@ export const BOOKS: Book[] = [
     ],
   },
 
-  /* ─── SÁCH NÓI ─── */
+  
   {
     id: '6',
     title: 'Kỹ Năng Thuyết Trình',
@@ -223,7 +223,7 @@ export const BOOKS: Book[] = [
     ],
   },
 
-  /* ─── SÁCH GIẤY ─── */
+  
   {
     id: '7',
     title: 'Ngữ Văn 9 - Tập 2',
@@ -245,7 +245,7 @@ export const BOOKS: Book[] = [
     pages: 220,
   },
 
-  /* ─── BÀI GIẢNG ─── */
+  
   {
     id: '8',
     title: 'Bài Giảng Toán 9: Hệ Phương Trình',
@@ -267,7 +267,7 @@ export const BOOKS: Book[] = [
     videoSource: 'YouTube',
   },
 
-  /* ─── ALBUM ─── */
+  
   {
     id: 'a1',
     title: 'Ngày Hội Đọc Sách 2024',
@@ -406,5 +406,7 @@ export const TYPE_CONFIG: Record<ResourceType, { label: string; bg: string; text
   'album':        { label: 'Album ảnh',    bg: 'bg-teal-100',   text: 'text-teal-700' },
 };
 
-// Albums subset for easy access
+
 export const ALBUMS = BOOKS.filter(b => b.type === 'album');
+
+

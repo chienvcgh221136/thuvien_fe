@@ -25,7 +25,7 @@ interface AlbumPhoto {
   isCover: boolean;
 }
 
-/* ─── helpers ─── */
+
 const uid = () => Math.random().toString(36).slice(2, 9);
 
 export const UploadPage: React.FC = () => {
@@ -38,7 +38,7 @@ export const UploadPage: React.FC = () => {
   const [published, setPublished] = useState(true);
   const [success, setSuccess]     = useState(false);
 
-  /* chapters / timestamps */
+  
   const [chapters, setChapters] = useState<Chapter[]>([
     { id: '1', name: 'Chương 1: Tôi sống độc lập từ thuở bé', duration: '15:30' },
     { id: '2', name: 'Chương 2: Cuộc phiêu lưu đầu tiên',     duration: '22:14' },
@@ -50,21 +50,21 @@ export const UploadPage: React.FC = () => {
     { id: '3', time: '22:15', label: 'Phương pháp cộng đại số' },
   ]);
 
-  /* album photos */
+  
   const [photos, setPhotos]       = useState<AlbumPhoto[]>([]);
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [dragOver, setDragOver]   = useState(false);
   const fileInputRef              = useRef<HTMLInputElement>(null);
 
-  /* ── chapter helpers ── */
+  
   const addChapter    = () => setChapters(c => [...c, { id: uid(), name: `Chương ${c.length + 1}`, duration: '00:00' }]);
   const removeChapter = (id: string) => setChapters(c => c.filter(ch => ch.id !== id));
 
-  /* ── timestamp helpers ── */
+  
   const addTimestamp    = () => setTimestamps(t => [...t, { id: uid(), time: '00:00', label: '' }]);
   const removeTimestamp = (id: string) => setTimestamps(t => t.filter(ts => ts.id !== id));
 
-  /* ── album helpers ── */
+  
   const addPhotos = useCallback((files: FileList | File[]) => {
     const arr = Array.from(files).filter(f => f.type.startsWith('image/'));
     if (!arr.length) return;
@@ -74,7 +74,7 @@ export const UploadPage: React.FC = () => {
         file: f,
         previewUrl: URL.createObjectURL(f),
         caption: '',
-        isCover: prev.length === 0 && i === 0, // first ever photo becomes cover
+        isCover: prev.length === 0 && i === 0, 
       }));
       return [...prev, ...next];
     });
@@ -83,7 +83,7 @@ export const UploadPage: React.FC = () => {
   const removePhoto = (id: string) =>
     setPhotos(prev => {
       const filtered = prev.filter(p => p.id !== id);
-      // if we removed the cover, auto-assign next
+      
       if (prev.find(p => p.id === id)?.isCover && filtered.length > 0) {
         filtered[0] = { ...filtered[0], isCover: true };
       }
@@ -107,7 +107,7 @@ export const UploadPage: React.FC = () => {
   const updateCaption = (id: string, caption: string) =>
     setPhotos(prev => prev.map(p => p.id === id ? { ...p, caption } : p));
 
-  /* drag-and-drop on drop zone */
+  
   const handleDropZoneDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setDragOver(false);
@@ -116,7 +116,7 @@ export const UploadPage: React.FC = () => {
 
   const steps = ['Thông tin cơ bản', 'Tải file lên', 'Xuất bản'];
 
-  /* ── success screen ── */
+  
   if (success) {
     return (
       <div className="animate-fade-in flex flex-col items-center justify-center py-20">
@@ -144,7 +144,7 @@ export const UploadPage: React.FC = () => {
     <div className="animate-fade-in max-w-4xl">
       <h1 className="text-2xl font-black text-gray-900 mb-6">Tải tài liệu mới</h1>
 
-      {/* Stepper */}
+      
       <div className="flex items-center mb-8 px-4">
         {steps.map((s, i) => {
           const stepNum = i + 1;
@@ -167,12 +167,12 @@ export const UploadPage: React.FC = () => {
         })}
       </div>
 
-      {/* ── Step 1: Basic Info ── */}
+      
       {step === 1 && (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 animate-fade-in">
           <h2 className="text-xl font-bold mb-6">1. Thông tin cơ bản</h2>
 
-          {/* Doc type selector */}
+          
           <div className="mb-7">
             <label className="block text-sm font-bold text-gray-700 mb-3">Loại tài liệu</label>
             <div className="flex gap-3 flex-wrap">
@@ -190,10 +190,10 @@ export const UploadPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Album: only title + description needed in step 1 */}
+          
           {docType === 'album' ? (
             <div className="space-y-4">
-              {/* Thumbnail upload */}
+              
               <div className="grid grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">Ảnh bìa album</label>
@@ -250,7 +250,7 @@ export const UploadPage: React.FC = () => {
               </div>
             </div>
           ) : (
-            /* Normal doc: cover + fields */
+            
             <div className="grid grid-cols-2 gap-5">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">Ảnh bìa</label>
@@ -325,15 +325,15 @@ export const UploadPage: React.FC = () => {
         </div>
       )}
 
-      {/* ── Step 2: Upload ── */}
+      
       {step === 2 && (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 animate-fade-in">
           <h2 className="text-xl font-bold mb-6">2. Tải file lên</h2>
 
-          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━ ALBUM ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          
           {docType === 'album' && (
             <div>
-              {/* Drop zone */}
+              
               <div
                 onDragOver={e => { e.preventDefault(); setDragOver(true); }}
                 onDragLeave={() => setDragOver(false)}
@@ -362,7 +362,7 @@ export const UploadPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Photo count badge */}
+              
               {photos.length > 0 && (
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
@@ -381,7 +381,7 @@ export const UploadPage: React.FC = () => {
                 </div>
               )}
 
-              {/* Photo grid */}
+              
               {photos.length > 0 && (
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-2">
                   {photos.map((photo, idx) => (
@@ -390,7 +390,7 @@ export const UploadPage: React.FC = () => {
                       className={`relative group rounded-xl overflow-hidden border-2 transition-all
                         ${photo.isCover ? 'border-teal-400 shadow-md shadow-teal-100' : 'border-gray-200 hover:border-teal-300'}`}
                     >
-                      {/* Image */}
+                      
                       <div className="aspect-[4/3] bg-gray-100">
                         <img
                           src={photo.previewUrl}
@@ -399,23 +399,23 @@ export const UploadPage: React.FC = () => {
                         />
                       </div>
 
-                      {/* Cover badge */}
+                      
                       {photo.isCover && (
                         <div className="absolute top-2 left-2 flex items-center gap-1 bg-teal-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">
                           <Star size={9} fill="white" /> ẢNH BÌA
                         </div>
                       )}
 
-                      {/* Index */}
+                      
                       <div className="absolute top-2 right-2 bg-black/40 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
                         {idx + 1}
                       </div>
 
-                      {/* Hover actions overlay */}
+                      
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-2 gap-1.5">
                         <div className="flex items-center gap-1 justify-between">
                           <div className="flex gap-1">
-                            {/* Set cover */}
+                            
                             {!photo.isCover && (
                               <button
                                 onClick={() => setCover(photo.id)}
@@ -425,7 +425,7 @@ export const UploadPage: React.FC = () => {
                                 <Star size={12} />
                               </button>
                             )}
-                            {/* Move up */}
+                            
                             {idx > 0 && (
                               <button
                                 onClick={() => movePhoto(photo.id, 'up')}
@@ -435,7 +435,7 @@ export const UploadPage: React.FC = () => {
                                 <ArrowUp size={12} />
                               </button>
                             )}
-                            {/* Move down */}
+                            
                             {idx < photos.length - 1 && (
                               <button
                                 onClick={() => movePhoto(photo.id, 'down')}
@@ -446,7 +446,7 @@ export const UploadPage: React.FC = () => {
                               </button>
                             )}
                           </div>
-                          {/* Delete */}
+                          
                           <button
                             onClick={() => removePhoto(photo.id)}
                             title="Xóa ảnh"
@@ -455,7 +455,7 @@ export const UploadPage: React.FC = () => {
                             <Trash2 size={12} />
                           </button>
                         </div>
-                        {/* Caption input */}
+                        
                         <input
                           type="text"
                           value={photo.caption}
@@ -468,7 +468,7 @@ export const UploadPage: React.FC = () => {
                     </div>
                   ))}
 
-                  {/* Add more tile */}
+                  
                   <button
                     onClick={() => fileInputRef.current?.click()}
                     className="aspect-[4/3] rounded-xl border-2 border-dashed border-gray-200 hover:border-teal-400 hover:bg-teal-50 flex flex-col items-center justify-center gap-2 transition-all text-gray-400 hover:text-teal-500"
@@ -479,7 +479,7 @@ export const UploadPage: React.FC = () => {
                 </div>
               )}
 
-              {/* Empty state tip */}
+              
               {photos.length === 0 && (
                 <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-700">
                   <AlertCircle size={18} className="shrink-0 mt-0.5" />
@@ -489,7 +489,7 @@ export const UploadPage: React.FC = () => {
             </div>
           )}
 
-          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━ PDF ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          
           {(docType === 'sach-dien-tu' || docType === 'bai-giang') && (
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-3">Tải lên file PDF</label>
@@ -501,7 +501,7 @@ export const UploadPage: React.FC = () => {
             </div>
           )}
 
-          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━ AUDIO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          
           {docType === 'sach-noi' && (
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-3">Tải lên file âm thanh theo chương</label>
@@ -529,7 +529,7 @@ export const UploadPage: React.FC = () => {
             </div>
           )}
 
-          {/* ━━━━━━━━━━━━━━━━━━━━━━━━━ VIDEO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          
           {docType === 'video' && (
             <div>
               <div className="flex gap-1 bg-gray-100 p-1 rounded-xl mb-5 w-fit">
@@ -616,7 +616,7 @@ export const UploadPage: React.FC = () => {
             </div>
           )}
 
-          {/* ━━━━━━━━━━━━━━━━━━━━━━━━ SÁCH GIẤY ━━━━━━━━━━━━━━━━━━━━━━━━ */}
+          
           {docType === 'sach-giay' && (
             <div className="grid grid-cols-3 gap-4">
               {[
@@ -643,15 +643,15 @@ export const UploadPage: React.FC = () => {
         </div>
       )}
 
-      {/* ── Step 3: Publish ── */}
+      
       {step === 3 && (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 animate-fade-in">
           <h2 className="text-xl font-bold mb-6">3. Xuất bản</h2>
 
-          {/* Preview card */}
+          
           <div className="bg-gray-50 rounded-2xl p-5 mb-6 flex gap-5 border border-gray-100">
             {docType === 'album' ? (
-              /* Album preview */
+              
               <div className="flex gap-4 w-full">
                 <div className="w-28 h-20 rounded-xl overflow-hidden shadow-md flex-shrink-0 bg-gray-200">
                   {coverPreview
@@ -668,7 +668,7 @@ export const UploadPage: React.FC = () => {
                     <Image size={13} /> {photos.length} ảnh
                   </p>
                 </div>
-                {/* Mini photo strip */}
+                
                 {photos.length > 0 && (
                   <div className="flex gap-1.5 items-center">
                     {photos.slice(0, 4).map((p, i) => (
@@ -685,7 +685,7 @@ export const UploadPage: React.FC = () => {
                 )}
               </div>
             ) : (
-              /* Normal doc preview */
+              
               <>
                 <div className="w-24 rounded-xl overflow-hidden shadow-md flex-shrink-0" style={{ aspectRatio: '3/4' }}>
                   {coverPreview
@@ -707,7 +707,7 @@ export const UploadPage: React.FC = () => {
             )}
           </div>
 
-          {/* Publish toggle */}
+          
           <div className="flex items-center gap-4 bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100">
             <div className="flex-1">
               <p className="font-semibold text-sm">Trạng thái xuất bản</p>

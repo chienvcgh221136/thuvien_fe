@@ -6,7 +6,10 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     @apply bg-gray-50 text-gray-900;
   }
-  a { text-decoration: none; }
+  a, button, [role="button"] { 
+    @apply cursor-pointer;
+    text-decoration: none; 
+  }
 }
 
 @layer utilities {

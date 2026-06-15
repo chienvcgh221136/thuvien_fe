@@ -20,20 +20,20 @@ const CATEGORIES = [
 export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
   const [activeMenu, setActiveMenu] = useState('tu-sach');
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0]);
-  const [activeFilter, setActiveFilter] = useState<'dang-doc' | 'yeu-thich'>('yeu-thich'); // using yeu-thich to show some books
+  const [activeFilter, setActiveFilter] = useState<'dang-doc' | 'yeu-thich'>('yeu-thich'); 
 
-  // Mocking favorites/reading list based on the user's view
-  // In a real app this would be fetched from user data.
+  
+  
   const displayBooks = BOOKS.slice(0, 4); 
 
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="max-w-[1200px] mx-auto px-8 py-8 flex flex-col lg:flex-row gap-6">
         
-        {/* ── Left Sidebar ── */}
+        
         <div className="w-full lg:w-[280px] flex-shrink-0">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col items-center py-8">
-            {/* Avatar */}
+            
             <div className="w-24 h-24 bg-gray-300 text-white rounded-full flex items-center justify-center text-3xl font-medium mb-4 shadow-inner">
               A
             </div>
@@ -75,7 +75,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* ── Main Content ── */}
+        
         <div className="flex-1">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 min-h-[600px]">
             
@@ -83,7 +83,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
               <>
                 <h1 className="text-xl font-bold text-gray-900 mb-6">Danh sách tài liệu</h1>
 
-                {/* Categories Scrollable List */}
+                
                 <div className="relative border-b border-gray-200 mb-6">
                   <div className="flex overflow-x-auto scrollbar-hide pr-8 gap-6">
                     {CATEGORIES.map(cat => (
@@ -97,13 +97,13 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
                       </button>
                     ))}
                   </div>
-                  {/* Right Arrow Indicator */}
+                  
                   <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent flex items-center justify-end pointer-events-none">
                     <ChevronRight size={16} className="text-gray-400" />
                   </div>
                 </div>
 
-                {/* Sub-filters */}
+                
                 <div className="flex gap-3 mb-8">
                   <button
                     onClick={() => setActiveFilter('dang-doc')}
@@ -121,7 +121,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
                   </button>
                 </div>
 
-                {/* Book Grid */}
+                
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
                   {displayBooks.map(book => {
                     const conf = TYPE_CONFIG[book.type];
@@ -131,17 +131,17 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
                         onClick={() => onNavigate('detail', book.id)}
                         className="group cursor-pointer"
                       >
-                        {/* Cover */}
+                        
                         <div className="relative bg-gray-100 rounded-lg overflow-hidden shadow-sm mb-3" style={{ aspectRatio: '3/4' }}>
                           <img src={book.cover} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                         </div>
 
-                        {/* Info */}
+                        
                         <div>
                           <h3 className="font-bold text-sm text-gray-900 line-clamp-2 mb-1 group-hover:text-[#008844] transition-colors">{book.title}</h3>
                           <p className="text-xs text-gray-500 mb-2">{book.category}</p>
                           
-                          {/* Views & Likes */}
+                          
                           <div className="flex items-center gap-2 text-xs text-gray-500">
                             <span className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded">
                               <Eye size={12} /> {book.views} lượt xem
@@ -168,13 +168,13 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
               <div className="animate-fade-in max-w-3xl">
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">Quản lý thông tin</h1>
 
-                {/* Tabs */}
+                
                 <div className="flex gap-6 border-b border-gray-100 mb-8">
                   <button className="pb-3 text-sm font-semibold text-[#008844] border-b-2 border-[#008844]">Thông tin cá nhân</button>
                   <button className="pb-3 text-sm font-semibold text-gray-500 hover:text-gray-700">Mật khẩu</button>
                 </div>
 
-                {/* Avatar Update */}
+                
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-16 h-16 bg-gray-300 text-white rounded-full flex items-center justify-center text-2xl font-medium shadow-inner">
                     A
@@ -189,7 +189,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
                   </div>
                 </div>
 
-                {/* Form */}
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                   <div>
                     <label className="block text-sm font-bold text-gray-800 mb-2">Họ và tên<span className="text-red-500">*</span></label>

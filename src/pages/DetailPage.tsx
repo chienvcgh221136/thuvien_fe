@@ -7,9 +7,7 @@ import {
 } from 'lucide-react';
 import { BOOKS, REVIEWS, TYPE_CONFIG, type AlbumPhoto } from '../data/mockData';
 
-/* ─────────────────────────────────────────────────────────────
-   Types
-───────────────────────────────────────────────────────────── */
+
 type NavigateFn = (page: string, bookId?: string, autoOpenReader?: boolean) => void;
 
 interface DetailPageProps {
@@ -19,9 +17,7 @@ interface DetailPageProps {
   autoOpenReader?: boolean;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Album Lightbox — fullscreen photo viewer
-───────────────────────────────────────────────────────────── */
+
 const AlbumLightbox: React.FC<{
   photos: AlbumPhoto[];
   initialIndex: number;
@@ -45,7 +41,7 @@ const AlbumLightbox: React.FC<{
       className="fixed inset-0 bg-black/95 z-50 flex flex-col animate-fade-in"
       onClick={onClose}
     >
-      {/* Top bar */}
+      
       <div
         className="flex items-center justify-between px-6 py-3 flex-shrink-0"
         onClick={e => e.stopPropagation()}
@@ -61,7 +57,7 @@ const AlbumLightbox: React.FC<{
         </button>
       </div>
 
-      {/* Main image */}
+      
       <div
         className="flex-1 flex items-center justify-center relative px-20 min-h-0"
         onClick={e => e.stopPropagation()}
@@ -92,7 +88,7 @@ const AlbumLightbox: React.FC<{
         </button>
       </div>
 
-      {/* Caption + thumbnail strip */}
+      
       <div className="flex-shrink-0 px-6 pb-5 pt-3" onClick={e => e.stopPropagation()}>
         {photo.caption && (
           <p className="text-white/70 text-center text-sm mb-3 font-medium">{photo.caption}</p>
@@ -115,9 +111,7 @@ const AlbumLightbox: React.FC<{
   );
 };
 
-/* ─────────────────────────────────────────────────────────────
-   Borrow Modal
-───────────────────────────────────────────────────────────── */
+
 const BorrowModal: React.FC<{
   book: import('../data/mockData').Book;
   onClose: () => void;
@@ -190,9 +184,7 @@ const BorrowModal: React.FC<{
   );
 };
 
-/* ─────────────────────────────────────────────────────────────
-   Book Reader — lật trang 3D
-───────────────────────────────────────────────────────────── */
+
 const BookReader: React.FC<{
   book: import('../data/mockData').Book;
   onClose: () => void;
@@ -276,8 +268,8 @@ const BookReader: React.FC<{
         .book-flip-prev { animation: flipPrev 0.62s cubic-bezier(0.645,0.045,0.355,1.000) forwards; transform-style: preserve-3d; }
       `}</style>
 
-      {/* Top bar */}
-      <div style={{ height: 56, background: '#006633', display: 'flex', alignItems: 'center', padding: '0 16px', gap: 10, flexShrink: 0, boxShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
+      
+      <div style={{ height: 56, background: '#1B8F3D', display: 'flex', alignItems: 'center', padding: '0 16px', gap: 10, flexShrink: 0, boxShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
         <button onClick={onClose} style={{ width: 36, height: 36, borderRadius: '50%', border: 'none', background: 'rgba(255,255,255,0.18)', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <ArrowLeft size={18} />
         </button>
@@ -290,7 +282,7 @@ const BookReader: React.FC<{
         </div>
       </div>
 
-      {/* Book stage */}
+      
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
         <button onClick={() => triggerFlip('prev')} disabled={currentPage <= 1 || isFlipping}
           style={{ position: 'absolute', left: 20, zIndex: 20, width: 44, height: 44, borderRadius: '50%', border: 'none', background: 'white', boxShadow: '0 4px 16px rgba(0,0,0,0.25)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#374151', opacity: (currentPage <= 1 || isFlipping) ? 0.2 : 1, transition: 'opacity 0.2s' }}>
@@ -298,14 +290,14 @@ const BookReader: React.FC<{
         </button>
 
         <div style={{ position: 'relative', display: 'flex', transform: `scale(${zoom})`, transition: 'transform 0.2s ease', perspective: 2400, perspectiveOrigin: 'center center', filter: 'drop-shadow(0 24px 48px rgba(0,0,0,0.45))' }}>
-          {/* Left page */}
+          
           <div style={{ width: PW, height: PH, overflow: 'hidden', position: 'relative', borderRadius: '4px 0 0 4px', boxShadow: '-4px 0 16px rgba(0,0,0,0.18)' }}>
             <PageContent pageNum={currentPage} />
             <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: 28, background: 'linear-gradient(to left, rgba(0,0,0,0.09), transparent)', pointerEvents: 'none' }} />
           </div>
-          {/* Spine */}
+          
           <div style={{ width: 3, background: 'linear-gradient(to right, rgba(0,0,0,0.18), rgba(0,0,0,0.04))', flexShrink: 0, zIndex: 6 }} />
-          {/* Right page */}
+          
           <div style={{ width: PW, height: PH, overflow: 'hidden', position: 'relative', borderRadius: '0 4px 4px 0', boxShadow: '4px 0 16px rgba(0,0,0,0.18)' }}>
             {currentPage + 1 <= totalPages ? <PageContent pageNum={currentPage + 1} /> : <div style={{ width: '100%', height: '100%', background: '#fafafa' }} />}
             <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: 28, background: 'linear-gradient(to right, rgba(0,0,0,0.09), transparent)', pointerEvents: 'none' }} />
@@ -344,7 +336,7 @@ const BookReader: React.FC<{
         </button>
       </div>
 
-      {/* Bottom bar */}
+      
       <div style={{ height: 44, background: 'white', borderTop: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', padding: '0 20px', gap: 14, flexShrink: 0 }}>
         <span style={{ fontSize: 13, color: '#6b7280', minWidth: 100 }}>Trang <strong style={{ color: '#111827' }}>{currentPage}/{totalPages}</strong></span>
         <div style={{ flex: 1, height: 6, background: '#e5e7eb', borderRadius: 99, overflow: 'hidden' }}>
@@ -360,9 +352,7 @@ const BookReader: React.FC<{
   );
 };
 
-/* ─────────────────────────────────────────────────────────────
-   Main Detail Page
-───────────────────────────────────────────────────────────── */
+
 export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPlayAudio, autoOpenReader }) => {
   const book = BOOKS.find(b => b.id === bookId) || BOOKS[0];
 
@@ -379,7 +369,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
   const isAlbum     = book.type === 'album';
   const isVideoType = book.type === 'video' || book.type === 'bai-giang';
 
-  /* Auto-open reader (e.g. clicked "Đọc ngay" từ listing page) */
+  
   useEffect(() => {
     if (autoOpenReader && (book.type === 'sach-dien-tu' || book.type === 'bai-giang')) {
       setShowReader(true);
@@ -406,7 +396,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
       <span key={i} style={{ fontSize: size, color: i < Math.round(rating) ? '#f59e0b' : '#d1d5db' }}>★</span>
     ));
 
-  /* CTA buttons in hero */
+  
   const renderCTA = () => {
     switch (book.type) {
       case 'album':
@@ -518,7 +508,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
       )}
 
       <div className="animate-fade-in">
-        {/* ── HERO ─────────────────────────────────────────── */}
+        
         <div
           className="relative overflow-hidden"
           style={{ background: 'linear-gradient(135deg, #2d4a3e 0%, #1a3a2e 40%, #3a5a4e 100%)', minHeight: 280 }}
@@ -527,7 +517,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/20" />
 
           <div className="relative max-w-[1200px] mx-auto px-8 py-8">
-            {/* Breadcrumb */}
+            
             <div className="flex items-center gap-1.5 text-sm text-white/60 mb-6">
               <button onClick={() => onNavigate('home')} className="hover:text-white transition-colors">Trang chủ</button>
               <ChevronRight size={13} />
@@ -537,7 +527,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
             </div>
 
             <div className="flex gap-8 items-start">
-              {/* Cover — landscape cho album, portrait cho sách */}
+              
               {isAlbum ? (
                 <div className="w-72 flex-shrink-0 rounded-xl overflow-hidden shadow-2xl border-2 border-white/20" style={{ aspectRatio: '4/3' }}>
                   <img src={book.cover} alt={book.title} className="w-full h-full object-cover" />
@@ -548,7 +538,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                 </div>
               )}
 
-              {/* Info */}
+              
               <div className="flex-1 min-w-0 text-white pt-1">
                 <h1 className="text-2xl md:text-3xl font-extrabold leading-tight mb-3">{book.title}</h1>
                 <div className="flex items-center gap-4 text-sm text-white/70 mb-4 flex-wrap">
@@ -594,9 +584,9 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
           </div>
         </div>
 
-        {/* ── CONTENT ────────────────────────────────────── */}
+        
 
-        {/* ═══ ALBUM GALLERY ═══════════════════════════════ */}
+        
         {isAlbum && (
           <div id="album-gallery" className="max-w-[1200px] mx-auto px-8 py-8">
             <div className="flex items-center justify-between mb-5">
@@ -611,9 +601,9 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
 
             {book.photos && book.photos.length > 0 && (
               <>
-                {/* Featured + side (first 3 photos) */}
+                
                 <div className="grid grid-cols-3 gap-3 mb-3">
-                  {/* Big featured */}
+                  
                   <div
                     className="col-span-2 relative cursor-pointer group overflow-hidden rounded-xl"
                     style={{ aspectRatio: '4/3' }}
@@ -636,7 +626,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                     </div>
                   </div>
 
-                  {/* Side column: photos 2 & 3 */}
+                  
                   <div className="flex flex-col gap-3">
                     {book.photos.slice(1, 3).map((photo, i) => (
                       <div
@@ -659,7 +649,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                   </div>
                 </div>
 
-                {/* Rest of photos: 3-col uniform grid */}
+                
                 {book.photos.length > 3 && (
                   <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
                     {book.photos.slice(3).map((photo, i) => (
@@ -685,7 +675,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
               </>
             )}
 
-            {/* Album description + metadata */}
+            
             <div className="mt-8 grid grid-cols-3 gap-6">
               <div className="col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <h3 className="font-bold text-gray-900 mb-3">Giới thiệu album</h3>
@@ -714,7 +704,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
               </div>
             </div>
 
-            {/* Reviews section for album */}
+            
             <div className="mt-6 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
               <h3 className="font-bold text-gray-900 mb-5 flex items-center gap-2">
                 Đánh giá
@@ -751,7 +741,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
               ))}
             </div>
 
-            {/* Related albums */}
+            
             {BOOKS.filter(b => b.type === 'album' && b.id !== bookId).length > 0 && (
               <div className="mt-6">
                 <h3 className="font-bold text-gray-900 mb-4">Album liên quan</h3>
@@ -777,11 +767,11 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
           </div>
         )}
 
-        {/* ═══ VIDEO LAYOUT ════════════════════════════════ */}
+        
         {isVideoType && !isAlbum && (
           <div className="max-w-[1200px] mx-auto px-8 py-8">
             <div className="flex gap-6">
-              {/* Left: player + info */}
+              
               <div className="flex-1 min-w-0">
                 {(showUrlInput || !embedUrl) && (
                   <div className="mb-4 p-4 bg-white border border-gray-200 rounded-2xl shadow-sm">
@@ -881,7 +871,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                 </div>
               </div>
 
-              {/* Right: related */}
+              
               <div className="w-72 flex-shrink-0 hidden lg:block">
                 <h3 className="font-bold text-gray-800 mb-3 text-sm">Xem nhiều</h3>
                 <div className="space-y-3">
@@ -912,13 +902,13 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
           </div>
         )}
 
-        {/* ═══ STANDARD BOOK LAYOUT (tabs) ════════════════ */}
+        
         {!isAlbum && !isVideoType && (
           <div className="max-w-[1200px] mx-auto px-8 py-8">
             <div className="flex gap-8">
-              {/* Main */}
+              
               <div className="flex-1 min-w-0">
-                {/* Tabs */}
+                
                 <div className="flex border-b-2 border-gray-200 mb-6">
                   {[
                     { id: 'mo-ta',    label: 'Giới thiệu sách' },
@@ -939,7 +929,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                 </div>
 
                 <div className="animate-fade-in">
-                  {/* Tab: Giới thiệu */}
+                  
                   {activeTab === 'mo-ta' && (
                     <div className="max-w-3xl">
                       <h1 className="text-2xl font-black text-gray-900 uppercase mb-3 tracking-wide">GIỚI THIỆU SÁCH</h1>
@@ -952,7 +942,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                         <span className="flex items-center gap-1.5"><Eye size={13} /> {book.views.toLocaleString()} lượt xem</span>
                       </div>
 
-                      {/* Tệp đính kèm */}
+                      
                       <div className="mb-6">
                         <h3 className="text-sm font-bold text-gray-700 mb-3">Tệp đính kèm</h3>
                         <div className="flex items-center gap-3 p-3 border border-blue-200 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors cursor-pointer group w-fit">
@@ -976,7 +966,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                           <p className="text-justify">
                             Tác phẩm <em className="font-semibold text-gray-900">&ldquo;{book.title}&rdquo;</em> của tác giả{' '}
                             <strong className="text-green-700">{book.author}</strong> là một trong những tài liệu được học sinh và giáo viên
-                            Trường THCS Dịch Vọng đánh giá cao nhất. Được xuất bản bởi <span className="font-medium">{book.publisher}</span> năm {book.year}, cuốn sách mang đến
+                            CODII SOLUTIONS đánh giá cao nhất. Được xuất bản bởi <span className="font-medium">{book.publisher}</span> năm {book.year}, cuốn sách mang đến
                             góc nhìn sâu sắc và toàn diện về {book.category.toLowerCase()}.
                           </p>
                           <p className="text-justify">
@@ -1025,7 +1015,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                         </div>
                       </div>
 
-                      {/* Nút Đọc sách for ebook/bai-giang */}
+                      
                       {(book.type === 'sach-dien-tu' || book.type === 'bai-giang') && (
                         <div className="mt-5 p-5 bg-green-50 border border-green-200 rounded-2xl flex items-center justify-between">
                           <div>
@@ -1043,7 +1033,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                     </div>
                   )}
 
-                  {/* Tab: Mục lục */}
+                  
                   {activeTab === 'muc-luc' && (
                     <div className="max-w-2xl">
                       {(book.tableOfContents || book.chapters?.map(c => c.title) || ['Chương 1', 'Chương 2']).map((item, i) => (
@@ -1067,7 +1057,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                     </div>
                   )}
 
-                  {/* Tab: Đánh giá */}
+                  
                   {activeTab === 'danh-gia' && (
                     <div className="max-w-3xl">
                       <div className="flex gap-8 items-center bg-white border border-gray-100 rounded-2xl p-6 shadow-sm mb-6">
@@ -1115,7 +1105,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                     </div>
                   )}
 
-                  {/* Tab: Tài liệu liên quan */}
+                  
                   {activeTab === 'lien-quan' && (
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                       {BOOKS.filter(b => b.id !== bookId).map(rb => {
@@ -1139,7 +1129,7 @@ export const DetailPage: React.FC<DetailPageProps> = ({ bookId, onNavigate, onPl
                 </div>
               </div>
 
-              {/* Sidebar */}
+              
               <div className="w-64 flex-shrink-0 hidden lg:block">
                 <h3 className="font-bold text-gray-800 mb-4 text-sm">Tài liệu liên quan</h3>
                 <div className="space-y-3">

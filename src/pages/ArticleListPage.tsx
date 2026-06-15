@@ -34,15 +34,8 @@ const MOCK_ARTICLES = [
 ];
 
 const PlaceholderImage = () => (
-  <div className="w-full h-full bg-[#d9d9d9] flex items-center justify-center">
-    <div className="w-16 h-16 flex flex-col items-center justify-center">
-      <div className="flex -mb-1">
-        <div className="w-4 h-8 bg-[#e96c24] rounded-sm transform -rotate-[15deg]"></div>
-        <div className="w-4 h-8 bg-[#008844] rounded-sm transform rotate-[15deg]"></div>
-      </div>
-      <div className="w-10 h-10 border-b-4 border-[#008844] rounded-full"></div>
-      <span className="text-[#008844] font-bold text-[8px] mt-1">VIELIB</span>
-    </div>
+  <div className="w-full h-full bg-gray-50 flex items-center justify-center">
+    <img src="/sach.jpg" alt="Thumbnail" className="h-1/5 object-contain mix-blend-multiply" />
   </div>
 );
 
@@ -52,8 +45,8 @@ export const ArticleListPage: React.FC<ArticleListPageProps> = ({ category, onNa
   return (
     <div className="bg-white min-h-screen">
       <div className="max-w-[1200px] mx-auto px-8 py-6">
+
         
-        {/* Breadcrumb */}
         <div className="flex items-center gap-1.5 text-sm mb-6">
           <button onClick={() => onNavigate('home')} className="text-gray-500 hover:text-green-600 transition-colors">Trang chủ</button>
           <span className="text-gray-400">/</span>
@@ -61,13 +54,13 @@ export const ArticleListPage: React.FC<ArticleListPageProps> = ({ category, onNa
         </div>
 
         <div className="flex flex-col lg:flex-row gap-10">
+
           
-          {/* Main Content (Left) */}
           <div className="flex-1 space-y-8">
             {MOCK_ARTICLES.filter(a => a.isFeatured || !a.isFeatured).map((article, idx) => (
               <div key={article.id} className={`group cursor-pointer ${idx !== MOCK_ARTICLES.length - 1 ? 'border-b border-gray-100 pb-8' : ''}`}>
                 {article.isFeatured ? (
-                  // Featured article layout (Image top, text bottom or Image left, text right)
+                  
                   <div className="flex flex-col md:flex-row gap-6">
                     <div className="w-full md:w-[60%] rounded-lg overflow-hidden bg-gray-100" style={{ aspectRatio: '16/9' }}>
                       <PlaceholderImage />
@@ -79,7 +72,7 @@ export const ArticleListPage: React.FC<ArticleListPageProps> = ({ category, onNa
                     </div>
                   </div>
                 ) : (
-                  // Standard article layout (Image left small, text right)
+                  
                   <div className="flex flex-col md:flex-row gap-6">
                     <div className="w-full md:w-[40%] rounded-lg overflow-hidden bg-gray-100" style={{ aspectRatio: '16/9' }}>
                       <PlaceholderImage />
@@ -95,10 +88,10 @@ export const ArticleListPage: React.FC<ArticleListPageProps> = ({ category, onNa
             ))}
           </div>
 
-          {/* Sidebar (Right) */}
+          
           <div className="w-full lg:w-[320px] flex-shrink-0">
             <h3 className="text-lg font-bold text-gray-900 border-b-2 border-green-600 pb-2 mb-5 inline-block">Xem nhiều</h3>
-            
+
             <div className="space-y-5">
               {MOCK_ARTICLES.filter(a => !a.isFeatured).map(article => (
                 <div key={'sidebar-' + article.id} className="flex gap-4 group cursor-pointer">
